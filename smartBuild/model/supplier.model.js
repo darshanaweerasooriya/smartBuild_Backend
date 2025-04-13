@@ -28,7 +28,15 @@ const supplierSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-})
+});
+
+supplierSchema.methods.comparePassword = async function (supplierPassword) {
+    try {
+        return await bcrypt.compare(supplierPassword, this.password);
+    } catch (error) {
+        throw error;
+    }
+};
 
 const supplierModel = db.model('supplier', supplierSchema);
 module.exports = supplierModel;
