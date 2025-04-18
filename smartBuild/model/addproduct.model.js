@@ -1,27 +1,25 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const db = require('../config/db');
 
 const addProductSchema = new mongoose.Schema({
     productname: {
         type: String,
         lowercase: true,
-        require
+        required: true
     },
     brand: {
         type: String,
         lowercase: true,
-        require
+        required: true
     },
     price: {
         type: String,
         lowercase: true,
-        require
+        required: true
     },
     description: {
         type: String,
         lowercase: true,
-        require
+        required: true
     },
     image: {
         data: Buffer,

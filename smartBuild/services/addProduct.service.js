@@ -11,8 +11,38 @@ const addproduct = async (prodductData, file) => {
         : undefined
 
     })
+
+    await product.save();
+
+    return product;
 };
 
+//update 
+
+const updateProduct = async (productID, updateData, file) => {
+    const updatedFields = {
+        ...updateData,
+    };
+
+    if (file) {
+        updatedFields.image ={
+            data: file.buffer,
+            contentType: file.mimetype
+        };
+    }
+
+    return await priduct.findByIdAndUpdate(productID, updatedFields, {new: true});
+};
+
+// delete
+
+const deleteProduct = async (productID) => {
+    return await product.findByIdAndDelete(productID);
+};
+
+
 module.exports ={
-    addproduct
+    addproduct,
+    updateProduct,
+    deleteProduct,
 };
