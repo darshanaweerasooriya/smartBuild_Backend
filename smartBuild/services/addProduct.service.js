@@ -17,6 +17,18 @@ const addproduct = async (prodductData, file) => {
     return product;
 };
 
+//get products
+
+const getAllProducts = async() => {
+    return await Product.find();
+};
+
+//get product by ID 
+
+const getProductById = async (id) =>{
+    return await Product.findById(id);
+}
+
 //update 
 
 const updateProduct = async (productID, updateData, file) => {
@@ -45,4 +57,6 @@ module.exports ={
     addproduct,
     updateProduct,
     deleteProduct,
+    getAllProducts,
+    getProductById
 };
