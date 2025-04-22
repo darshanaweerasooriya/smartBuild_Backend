@@ -3,8 +3,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const app = require('./app');
-const db = require('./config/db'); // Assuming your db connection is initialized here
-const { Socket } = require('dgram');
+const db = require('./config/db');
 
 app.use(cors());
 
@@ -13,7 +12,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
         origin: '*',
-      },
+    },
 });
 
 app.set('io', io);
@@ -25,12 +24,12 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-    console.log('User Connceted', Socket.id);
+    console.log('User Connected', socket.id);
 
     socket.on('joinRoom', ({ senderId, receiverId }) => {
         const roomId = [senderId, receiverId].sort().join('_');
         socket.join(roomId);
-        console.log('${senderId} joined room ${roomId}');
+        console.log(`${senderId} joined room ${roomId}`);
     });
 
     socket.on('sendMessage', ({ senderId, receiverId, message }) => {
@@ -40,11 +39,11 @@ io.on('connection', (socket) => {
         io.to(roomId).emit('receiveMessage', msgObj);
     });
 
-    socket.on('disconnect', ()=> {
+    socket.on('disconnect', () => {
         console.log('User disconnected:', socket.id);
     });
 });
 
-app.listen(port, () => {
+server.listen(port, () => {
     console.log(`Server Listening on port http://localhost:${port}`);
 });
