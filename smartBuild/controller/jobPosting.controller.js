@@ -16,7 +16,8 @@ const addJob = async (req, res) => {
 
 const getAllJobs = async (req, res) => {
     try {
-        const jobs = await jobService.getAllJobs();
+        const filters = req.query;
+        const jobs = await jobService.getAllJobs(filters);
         res.status(200).json(jobs);
 
     }catch (error){
@@ -67,6 +68,8 @@ const deleteJob = async (req, res) => {
         res.status(500).json({ message: 'Error deleting Job' });
     }
 }
+
+
 
 module.exports = {
     addJob,

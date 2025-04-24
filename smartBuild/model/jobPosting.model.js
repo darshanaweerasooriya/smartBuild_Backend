@@ -11,6 +11,14 @@ const addJobScheme = new mongoose.Schema({
         lowercase: true,
         required: true
     },
+    location: {
+        type: String,
+        lowercase: true
+      },
+    jobType: {
+        type: String, // e.g., fulltime, parttime
+        lowercase: true
+    },
     image: {
         data: Buffer,
         contentType: String

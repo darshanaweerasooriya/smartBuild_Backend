@@ -17,8 +17,22 @@ const addJob = async (jobData, file) => {
     return job;
 };
 
-const getAllJobs = async() =>  {
-    return await JobPosting.find();
+const getAllJobs = async (filters) =>  {
+
+    const query = {};
+    if (filters.jobTitle){
+        query.jobTitle = { $regex: filters.jobTitle, $options:'i'};
+
+    }
+
+    if (filters.location){
+        query.location =  { $regex: filters.location, $options:'i'};
+    }
+
+    if (filters.jobType){
+        query.jobType =  { $regex: filters.jobType, $options:'i'};
+    }
+    return await JobPosting.find(query);
 }
 
 const getJobId = async (id) =>{
