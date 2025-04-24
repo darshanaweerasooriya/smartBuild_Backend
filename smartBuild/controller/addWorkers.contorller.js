@@ -43,10 +43,36 @@ const deleteWork = async (req, res) => {
                 console.error(error);
                 res.status(500).json({ message: 'Error deleting worker' });
             }
-}
+};
+
+const getAllWorkers = async (req, res) => {
+    try {
+        const workers = await workerService.getAllWorkers();
+        res.status(200).json(workers);
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error fetching workers' })
+    }
+};
+
+const getWorkerById = async (res, req) => {
+    try {
+        const worker = await workerService.getWorkerById(req.params.id);
+        if (!worker) {
+            return res.status(404).json({ message: 'Worker not found' });
+
+        }
+        res.status(200).json(worker);
+    }catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error fetching worker' });
+    }
+};
 
 module.exports = {
     addWorker,
     updateWorker,
-    deleteWork
+    deleteWork,
+    getAllWorkers,
+    getWorkerById
 }
