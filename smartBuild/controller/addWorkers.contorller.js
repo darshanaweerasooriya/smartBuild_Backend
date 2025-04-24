@@ -68,7 +68,7 @@ const getWorkerById = async (res, req) => {
         res.status(500).json({ message: 'Error fetching worker' });
     }
 };
-
+ 
 module.exports = {
     addWorker,
     updateWorker,

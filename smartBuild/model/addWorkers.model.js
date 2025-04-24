@@ -52,4 +52,4 @@ const addWorkers = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('workers', addWorkers);
+module.exports = mongoose.model('workers', addWorkers); 
