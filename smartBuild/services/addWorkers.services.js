@@ -16,6 +16,35 @@ const addWorkers = async (workData, file) => {
     return work;
 }
 
-module.exports ={
-    addWorkers
+const updatedWorker = async (id, data, file) => {
+    const updatData = {
+        ...data
+    };
+    if (file) {
+        updatData.image ={
+            data: file.buffer,
+            contentType: file.mimetype
+        }
+    }
+    return await Worker.findByIdAndUpdate(id, updateData, { new: true });
+};
+
+const deleteWork = async (id) => {
+    return await Worker.findByIdAndDelete(id);
 }
+
+const getAllWorkers = async () => {
+    return await Worker.find();
+};
+
+const getWorkerById = async (id) => {
+    return await Worker.findById(id);
+};
+
+module.exports ={
+    addWorkers,
+    updatedWorker,
+    deleteWork,
+    getAllWorkers,
+    getWorkerById
+} 
