@@ -9,6 +9,7 @@ const jobRoute = require("./router/jobPosting.router")
 const workerRoute = require("./router/addWorkers.route")
 const designRoute = require("./router/interiorDesign.route")
 const machineRoute = require("./router/machine.route")
+const session = require('express-session');
 require('./config/db');
 const app =express();
 
@@ -18,6 +19,13 @@ const app =express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
+
+app.use(session({
+    secret: 'yourSecretKey',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {secure:false }
+}))
 
 app.use('/',userRouter);
 app.use('/',supplier);

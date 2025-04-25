@@ -73,8 +73,8 @@ class userService {
     }
 
 
-    static async generateToken(tokenData,secretKey,jwt_expire){
-        return jwt.sign(tokenData,secretKey,{expiresIn:jwt_expire});
+    static async generateToken(tokenData, secretKey, jwt_expire){
+        return jwt.sign(tokenData,secretKey,{expiresIn:jwt_expire + 'd'});
     
     }
     
@@ -100,9 +100,10 @@ class userService {
     
     
     static async getusetdata(email){
-        const userdata = await UserModel.find({email})
-    
+        const userdata = await UserModel.findOne({ email }).select('-password');
         return userdata;
+    }catch (error) {
+        throw error;
     }
     
     
