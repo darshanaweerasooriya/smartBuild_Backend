@@ -18,8 +18,6 @@ exports.register = async (req, res, next) => {
 exports.login = async(req,res,next)=>{
     try{
         const {email,password} = req.body;
-       
-
         const user = await userService.checkuser(email);
        
 
@@ -36,11 +34,21 @@ exports.login = async(req,res,next)=>{
 
         const token = await userService.generateToken(tokenData,"secretKey",'1')
 
-        res.status(200).json({status:true,token:token})
+        res.status(200).json({
+            status:true
+            ,token:token,
+            user: {
+                _id: user._id,
+                email: user.email,
+                name: user.firstName + " " + user.lastName
+            }
+        
+        });
+
 
         
     }catch(error){
-        throw error
+        res.status(401).json({ status: false, message: error.message });
     }
 
 
@@ -48,7 +56,7 @@ exports.login = async(req,res,next)=>{
 
 exports.getuser = async (req,res,next)=>{
     try{
-        const {email} = req.body;
+        const {email} = req.user.email;
 
         let userdetail = await userService.getusetdata(email);
 
