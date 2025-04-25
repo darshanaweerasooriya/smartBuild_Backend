@@ -7,7 +7,8 @@ const addproduct = require("./router/addProduct.route")
 const paymentRoute = require("./router/payment.route")
 const jobRoute = require("./router/jobPosting.router")
 const workerRoute = require("./router/addWorkers.route")
-const designRouter = require("./router/interiorDesign.router")
+const designRoute = require("./router/interiorDesign.route")
+const machineRoute = require("./router/machine.route")
 require('./config/db');
 const app =express();
 
@@ -24,7 +25,8 @@ app.use('/',addproduct);
 app.use('/api/payment', paymentRoute);
 app.use('/',jobRoute);
 app.use('/',workerRoute);
-app.use('/',designRouter);
+app.use('/',designRoute);
+app.use('/',machineRoute)
 
 
 app.get('/api/', (req, res) => {
