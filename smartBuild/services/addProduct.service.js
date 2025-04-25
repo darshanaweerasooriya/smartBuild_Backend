@@ -43,13 +43,13 @@ const updateProduct = async (productID, updateData, file) => {
         };
     }
 
-    return await priduct.findByIdAndUpdate(productID, updatedFields, {new: true});
+    return await Product.findByIdAndUpdate(productID, updatedFields, {new: true});
 };
 
 // delete
 
 const deleteProduct = async (productID) => {
-    return await product.findByIdAndDelete(productID);
+    return await Product.findByIdAndDelete(productID);
 };
 
 
