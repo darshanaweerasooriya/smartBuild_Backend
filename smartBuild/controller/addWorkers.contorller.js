@@ -13,6 +13,19 @@ const addWorker = async (req, res) => {
     }
 };
 
+const logingWorker = async (req, res)=> {
+    try {
+        const {email, password} = req.body;
+        const { toekn } = await authService.logingWorker(email, password);
+        
+        req.session.toekn = toekn;
+        res.status(200).json({ toekn, message: 'login successfull'});
+    }catch (error) {
+        res.status(401).json({ message: error.message });
+    }
+
+}
+
 const updateWorker = async (req, res) => {
     try{
         const updatedWorker = await workerService.updateWorker(req.params.id, req.body, req.file);
@@ -74,5 +87,6 @@ module.exports = {
     updateWorker,
     deleteWork,
     getAllWorkers,
-    getWorkerById
+    getWorkerById,
+    logingWorker
 }

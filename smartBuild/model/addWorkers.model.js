@@ -21,6 +21,16 @@ const addWorkers = new mongoose.Schema({
         lowercase: true,
         required: true
     },
+    email:{
+        type: String,
+        lowercase: true,
+        required: true
+    },
+    password: {
+        type: String,
+        lowercase: true,
+        required: true
+    },
     workingType: {
         type: String,
         lowercase: true,
@@ -41,6 +51,7 @@ const addWorkers = new mongoose.Schema({
         lowercase: true,
         required: true
     },
+   
     grossSalary: {
         type: String,
         lowercase: true,
